@@ -1,6 +1,9 @@
 #ifndef ARDUINO_ADXL375_ADXL375_H
 #define ARDUINO_ADXL375_ADXL375_H
 
+#include "Arduino.h"
+#include "Wire.h"
+#include "SPI.h"
 #include "protocol.h"
 #include "ADXL375_register.h"
 #include "ADXL375_constants.h"

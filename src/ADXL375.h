@@ -1,17 +1,21 @@
 #ifndef ARDUINO_ADXL375_ADXL375_H
 #define ARDUINO_ADXL375_ADXL375_H
 
+#include "Arduino.h"
+#include "Wire.h"
+#include "SPI.h"
 #include "protocol.h"
 #include "ADXL375_register.h"
 #include "ADXL375_constants.h"
 #include "Vector.h"
 #include "dynamicFifo.h"
 
+#define ADXL375_ACC_CONVERSION_FACTOR 0.00981 * 49
+
 class ADXL375 {
 protected:
 
     protocol *device;
-    double acc_conversion_factor;
 
 public:
     /*
@@ -34,6 +38,7 @@ public:
      */
     void begin() {
         device->protocol_begin();
+        default_configuration();
         // any other set up etc
 
     }
@@ -42,38 +47,57 @@ public:
 
     uint8_t set_spi_mode(bool enable);
 
-    uint8_t set_INTERRUPT(int bit_num, bool set_pin, INTERRUPTS interrupt, bool enable);
+    uint8_t set_INTERRUPT(int bit_num, bool set_pin, ADXL375_INTERRUPTS interrupt, bool enable);
 
-    uint8_t set_low_DATA_RATE(Low_power_ODR rate);
+    uint8_t set_low_DATA_RATE(ADXL375_Low_power_ODR rate);
 
-    uint8_t set_DATA_RATE(ODR rate);
+    /**
+     * Set the device bandwidth and output data rate. Default is 100Hz ADXL375_ODR.
+     *
+     * The selected output data rate must be appropriate for the communication protocol and frequency selected.
+     *
+     * Selecting an output data rate that is too high for the communication speed may result in samples being discarded
+     * @param rate The new Output Data Rate to set
+     * @return 0 if success, else error code
+     */
+    uint8_t set_data_rate(ADXL375_ODR rate);
 
-    uint8_t set_standby_mode(bool enable);
+    uint8_t set_measure_mode(bool enable);
 
     uint8_t ac_coupled_mode(bool enable);
 
-    uint8_t set_fifo_mode(FIFO_MODES mode);
+    uint8_t set_fifo_mode(ADXL375_FIFO_MODES mode);
 
     uint8_t default_configuration();
 
-    uint8_t Self_test(bool enable, Self_test_ODR rate);
+    /**
+     * Run the self test procedure as described in the datasheet page 29.
+     * @return The self test result (z axis). From testing this seems to range between 50-60.
+     */
+    float self_test();
 
-    uint8_t MSB_or_LSB(bool enable);
+    Vector<double, 3> get_accel();
 
-    Vector<double, 3> read_acc_data();
+    protocol* get_device() {
+        return device;
+    }
 
-    uint8_t enable_200gs(bool enable);
+    /**
+     * Write to all registers their default values.
+     * @return 0 if success, else error code
+     */
+    uint8_t reset();
 };
 
 
 
 
 
-//uint8_t set_adxl_ODR(ODR rate);
+//uint8_t set_adxl_ODR(ADXL375_ODR rate);
 //uint8_t low_power_mode();
 //uint8_t auto_sleep_mode();
 //uint8_t standby_mode();
-//uint8_t set_FIFO_mode(FIFO_MODES mode);
+//uint8_t set_FIFO_mode(ADXL375_FIFO_MODES mode);
 //uint8_t adxl_self_test();
 //
 //

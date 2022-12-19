@@ -23,7 +23,7 @@ enum DEVID{
 //};
 
 
-enum BATCHING_DATA_RATE{
+enum ADXL375_BATCHING_DATA_RATE{
 
   BDR_3200_HZ = 0b1111,
   BDR_1600_HZ = 0b1110, 
@@ -37,7 +37,7 @@ enum BATCHING_DATA_RATE{
   NO_BATCHING = 0b0000 
 };
 
-enum Low_power_BDR{
+enum ADXL375_Low_power_BDR{
     BDR_400_HZ = 0b1100,
     BDR_100_HZ = 0b1010,  
     BDR_50_HZ = 0b1001,  
@@ -45,7 +45,7 @@ enum Low_power_BDR{
     BDR_12_5_HZ = 0b0111, 
 };
 
-enum FIFO_MODES { //30 samples collected in each fifo mode except bypass. Bit D5 = 0 links the trigger event of trigger mode to the INT1 pin
+enum ADXL375_FIFO_MODES { //30 samples collected in each fifo mode except bypass. Bit D5 = 0 links the trigger event of trigger mode to the INT1 pin
 
 
     BYPASS_MODE = 0b00000000,
@@ -124,7 +124,7 @@ enum FIFO_MODES { //30 samples collected in each fifo mode except bypass. Bit D5
 
 
 
-enum INTERRUPTS {
+enum ADXL375_INTERRUPTS {
 
   Data_Ready = 7, //The DATA_READY bit is set when new data is available and is cleared when no new data is available.
   Single_Shock = 6, // The SINGLE_SHOCK bit is set when a single acceleration event that is greater than the value in the THRESH_SHOCK register  (Address 0x1D) occurs for less time than is specified by the DUR register (Address 0x21)
@@ -150,7 +150,7 @@ enum INTERRUPTS {
 };
 
 
-enum ODR{
+enum ADXL375_ODR{
   ODR_3200_HZ = 0b1111, ///< 1600Hz Bandwidth   145microA IDD
   ODR_1600_HZ = 0b1110, ///<  800Hz Bandwidth    90microA IDD
   ODR_800_HZ = 0b1101,  ///<  400Hz Bandwidth   140microA IDD
@@ -171,7 +171,7 @@ enum ODR{
 
 
 
-enum Low_power_ODR{
+enum ADXL375_Low_power_ODR{
   Low_ODR_400_HZ = 0b1100,  ///< 200Hz Bandwidth   90microA IDD
   Low_ODR_200_HZ = 0b1011,  ///< 100Hz Bandwidth   60microA IDD
   Low_ODR_100_HZ = 0b1010,  ///< 50Hz Bandwidth    50microA IDD
@@ -180,7 +180,7 @@ enum Low_power_ODR{
   Low_ODR_12_5_HZ = 0b0111, ///< 6.25Hz Bandwidth  35microA IDD
 };
 
- enum Self_test_ODR{
+ enum ADXL375_Self_test_ODR{
    Self_ODR_800_HZ = 0b1101,  ///<  400Hz Bandwidth   140microA IDD
    Self_ODR_400_HZ = 0b1100,  ///<  200Hz Bandwidth   140microA IDD
    Self_ODR_200_HZ = 0b1011,  ///<  100Hz Bandwidth   140microA IDD

@@ -38,6 +38,7 @@ public:
      */
     void begin() {
         device->protocol_begin();
+        default_configuration();
         // any other set up etc
 
     }

@@ -21,6 +21,7 @@ void setUp() {
     pinMode(37, OUTPUT);
     digitalWrite(37, HIGH);
 #endif
+    adxl.reset();
     adxl.default_configuration();
 }
 

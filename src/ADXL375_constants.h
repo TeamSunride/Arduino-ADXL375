@@ -12,7 +12,7 @@
 #define ADXL375_DEFAULT_I2C_ADDRESS 0x1D // When the ALT ADDRESS pin (Pin 12) is tied high to VDD I/O, the 7-bit I2C address for the device 
 
 enum DEVID{
-    Fixed_Device_ID_Code = 0xE5
+    ADXL375_Fixed_Device_ID_Code = 0xE5
 };
 
 
@@ -25,33 +25,33 @@ enum DEVID{
 
 enum ADXL375_BATCHING_DATA_RATE{
 
-  BDR_3200_HZ = 0b1111,
-  BDR_1600_HZ = 0b1110, 
-  BDR_800_HZ = 0b1101,
-  BDR_6_25HZ = 0b0110, 
-  BDR_3_13_HZ = 0b0101,
-  BDR_1_56_HZ = 0b0100, 
-  BDR_0_78_HZ = 0b0011, 
-  BDR_0_39_HZ = 0b0010, 
-  BDR_0_20_HZ = 0b0001, 
-  NO_BATCHING = 0b0000 
+  ADXL375_BDR_3200_HZ = 0b1111,
+  ADXL375_BDR_1600_HZ = 0b1110,
+  ADXL375_BDR_800_HZ = 0b1101,
+  ADXL375_BDR_6_25HZ = 0b0110,
+  ADXL375_BDR_3_13_HZ = 0b0101,
+  ADXL375_BDR_1_56_HZ = 0b0100,
+  ADXL375_BDR_0_78_HZ = 0b0011,
+  ADXL375_BDR_0_39_HZ = 0b0010,
+  ADXL375_BDR_0_20_HZ = 0b0001,
+  ADXL375_NO_BATCHING = 0b0000
 };
 
 enum ADXL375_Low_power_BDR{
-    BDR_400_HZ = 0b1100,
-    BDR_100_HZ = 0b1010,  
-    BDR_50_HZ = 0b1001,  
-    BDR_25_HZ = 0b1100,  
-    BDR_12_5_HZ = 0b0111, 
+    ADXL375_BDR_400_HZ = 0b1100,
+    ADXL375_BDR_100_HZ = 0b1010,
+    ADXL375_BDR_50_HZ = 0b1001,
+    ADXL375_BDR_25_HZ = 0b1100,
+    ADXL375_BDR_12_5_HZ = 0b0111,
 };
 
 enum ADXL375_FIFO_MODES { //30 samples collected in each fifo mode except bypass. Bit D5 = 0 links the trigger event of trigger mode to the INT1 pin
 
 
-    BYPASS_MODE = 0b00000000,
+    ADXL375_BYPASS_MODE = 0b00000000,
     //In bypass mode, the FIFO buffer is not operational and, therefore, remains empty.
 
-    FIFO_MODE = 0b01111010,
+    ADXL375_FIFO_MODE = 0b01111010,
 
     //In FIFO mode, data from measurements of the x-, y-, and z-axes
     // is stored in the FIFO buffer. When the number of samples in the
@@ -65,7 +65,7 @@ enum ADXL375_FIFO_MODES { //30 samples collected in each fifo mode except bypass
     // set until the number of samples in the FIFO buffer is less than
     // the value stored in the samples bits of the FIFO_CTL register.
 
-    STREAM_MODE = 0b01111001,
+    ADXL375_STREAM_MODE = 0b01111001,
 
     // In stream mode, data from measurements of the x-, y-, and z-axes
     // is stored in the FIFO buffer. When the number of samples in the
@@ -78,7 +78,7 @@ enum ADXL375_FIFO_MODES { //30 samples collected in each fifo mode except bypass
     // the number of samples in the FIFO buffer is less than the value
     // stored in the samples bits of the FIFO_CTL register
 
-    TRIGGER_MODE = 0b01111011,
+    ADXL375_TRIGGER_MODE = 0b01111011,
 
     // In trigger mode, the FIFO buffer accumulates samples, storing
     // the latest 32 samples from measurements of the x-, y-, and z-axes.
@@ -126,23 +126,23 @@ enum ADXL375_FIFO_MODES { //30 samples collected in each fifo mode except bypass
 
 enum ADXL375_INTERRUPTS {
 
-  Data_Ready = 7, //The DATA_READY bit is set when new data is available and is cleared when no new data is available.
-  Single_Shock = 6, // The SINGLE_SHOCK bit is set when a single acceleration event that is greater than the value in the THRESH_SHOCK register  (Address 0x1D) occurs for less time than is specified by the DUR register (Address 0x21)
-  Double_Shock = 5, 
+  ADXL375_Data_Ready = 7, //The DATA_READY bit is set when new data is available and is cleared when no new data is available.
+  ADXL375_Single_Shock = 6, // The SINGLE_SHOCK bit is set when a single acceleration event that is greater than the value in the THRESH_SHOCK register  (Address 0x1D) occurs for less time than is specified by the DUR register (Address 0x21)
+  ADXL375_Double_Shock = 5,
   //The DOUBLE_SHOCK bit is set when two acceleration events that are greater than the value in the THRESH_SHOCK register (Address 0x1D) occur for less time than is specified by the DUR
   //register (Address 0x21). The second shock event starts after the time specified by the latent register (Address 0x22) but within the time specified by the window register (Address 0x23)
-  Activity = 4,
+  ADXL375_Activity = 4,
   //The activity bit is set when acceleration greater than the value stored in the THRESH_ACT register (Address 0x24) is experienced on any participating axis. 
   //Participating axes are specified by the ACT_INACT_CTL register (Address 0x27).
-  Inactivity = 3,
+  ADXL375_Inactivity = 3,
   //The inactivity bit is set when acceleration less than the value stored in the THRESH_INACT register (Address 0x25) is experienced
   //for more time than is specified by the TIME_INACT register (Address 0x26) on all participating axes. Participating axes are
   //specified by the ACT_INACT_CTL register (Address 0x27). The maximum value for TIME_INACT is 255 sec.
-  Watermark = 1,
+  ADXL375_Watermark = 1,
   //The watermark bit is set when the number of samples in the FIFO buffer equals the value stored in the samples bits (Bits[D4:D0])
   //of the FIFO_CTL register (Address 0x38). The watermark bit is cleared automatically when the FIFO buffer is read and the
   //FIFO contents return to a value below the value specified by the samples bits.
-  Overrun = 0,
+  ADXL375_Overrun = 0,
   // The overrun bit is set when new data replaces unread data. The precise operation of the overrun function depends on the FIFO mode.
   //• In bypass mode, the overrun bit is set when new data replaces unread data in the data registers (Address 0x32 to Address 0x37).
   //• In FIFO mode, stream mode, and trigger mode, the overrun bit is set when the FIFO buffer is full.
@@ -151,41 +151,41 @@ enum ADXL375_INTERRUPTS {
 
 
 enum ADXL375_ODR{
-  ODR_3200_HZ = 0b1111, ///< 1600Hz Bandwidth   145microA IDD
-  ODR_1600_HZ = 0b1110, ///<  800Hz Bandwidth    90microA IDD
-  ODR_800_HZ = 0b1101,  ///<  400Hz Bandwidth   140microA IDD
+  ADXL375_ODR_3200_HZ = 0b1111, ///< 1600Hz Bandwidth   145microA IDD
+  ADXL375_ODR_1600_HZ = 0b1110, ///<  800Hz Bandwidth    90microA IDD
+  ADXL375_ODR_800_HZ = 0b1101,  ///<  400Hz Bandwidth   140microA IDD
       ///<  200Hz Bandwidth   140microA IDD
-  ODR_200_HZ = 0b1011,  ///<  100Hz Bandwidth   140microA IDD
-  ODR_100_HZ = 0b1010,  ///<   50Hz Bandwidth   140microA IDD
-  ODR_50_HZ = 0b1001,   ///<   25Hz Bandwidth    90microA IDD
-  ODR_25_HZ = 0b1000,   ///< 12.5Hz Bandwidth    60microA IDD
-  ODR_12_5_HZ = 0b0111, ///< 6.25Hz Bandwidth    50microA IDD
-  ODR_6_25HZ = 0b0110,  ///< 3.13Hz Bandwidth    40microA IDD
-  ODR_3_13_HZ = 0b0101, ///< 1.56Hz Bandwidth    35microA IDD
-  ODR_1_56_HZ = 0b0100, ///< 0.78Hz Bandwidth    35microA IDD
-  ODR_0_78_HZ = 0b0011, ///< 0.39Hz Bandwidth    35microA IDD
-  ODR_0_39_HZ = 0b0010, ///< 0.20Hz Bandwidth    35microA IDD
-  ODR_0_20_HZ = 0b0001, ///< 0.10Hz Bandwidth    35microA IDD
-  ODR_0_10_HZ = 0b0000 ///< 0.05Hz Bandwidth    35microA IDD (default value)
+  ADXL375_ODR_200_HZ = 0b1011,  ///<  100Hz Bandwidth   140microA IDD
+  ADXL375_ODR_100_HZ = 0b1010,  ///<   50Hz Bandwidth   140microA IDD
+  ADXL375_ODR_50_HZ = 0b1001,   ///<   25Hz Bandwidth    90microA IDD
+  ADXL375_ODR_25_HZ = 0b1000,   ///< 12.5Hz Bandwidth    60microA IDD
+  ADXL375_ODR_12_5_HZ = 0b0111, ///< 6.25Hz Bandwidth    50microA IDD
+  ADXL375_ODR_6_25HZ = 0b0110,  ///< 3.13Hz Bandwidth    40microA IDD
+  ADXL375_ODR_3_13_HZ = 0b0101, ///< 1.56Hz Bandwidth    35microA IDD
+  ADXL375_ODR_1_56_HZ = 0b0100, ///< 0.78Hz Bandwidth    35microA IDD
+  ADXL375_ODR_0_78_HZ = 0b0011, ///< 0.39Hz Bandwidth    35microA IDD
+  ADXL375_ODR_0_39_HZ = 0b0010, ///< 0.20Hz Bandwidth    35microA IDD
+  ADXL375_ODR_0_20_HZ = 0b0001, ///< 0.10Hz Bandwidth    35microA IDD
+  ADXL375_ODR_0_10_HZ = 0b0000 ///< 0.05Hz Bandwidth    35microA IDD (default value)
 };
 
 
 
 enum ADXL375_Low_power_ODR{
-  Low_ODR_400_HZ = 0b1100,  ///< 200Hz Bandwidth   90microA IDD
-  Low_ODR_200_HZ = 0b1011,  ///< 100Hz Bandwidth   60microA IDD
-  Low_ODR_100_HZ = 0b1010,  ///< 50Hz Bandwidth    50microA IDD
-  Low_ODR_50_HZ = 0b1001,  ///< 25Hz Bandwidth     45microA IDD
-  Low_ODR_25_HZ = 0b1100,  ///< 12.5Hz Bandwidth   40microA IDD
-  Low_ODR_12_5_HZ = 0b0111, ///< 6.25Hz Bandwidth  35microA IDD
+  ADXL375_Low_ODR_400_HZ = 0b1100,  ///< 200Hz Bandwidth   90microA IDD
+  ADXL375_Low_ODR_200_HZ = 0b1011,  ///< 100Hz Bandwidth   60microA IDD
+  ADXL375_Low_ODR_100_HZ = 0b1010,  ///< 50Hz Bandwidth    50microA IDD
+  ADXL375_Low_ODR_50_HZ = 0b1001,  ///< 25Hz Bandwidth     45microA IDD
+  ADXL375_Low_ODR_25_HZ = 0b1100,  ///< 12.5Hz Bandwidth   40microA IDD
+  ADXL375_Low_ODR_12_5_HZ = 0b0111, ///< 6.25Hz Bandwidth  35microA IDD
 };
 
  enum ADXL375_Self_test_ODR{
-   Self_ODR_800_HZ = 0b1101,  ///<  400Hz Bandwidth   140microA IDD
-   Self_ODR_400_HZ = 0b1100,  ///<  200Hz Bandwidth   140microA IDD
-   Self_ODR_200_HZ = 0b1011,  ///<  100Hz Bandwidth   140microA IDD
-   Self_ODR_100_HZ = 0b1010,  ///<   50Hz Bandwidth   140microA IDD
-   Self_ODR_3200_HZ = 0b1111, ///< 1600Hz Bandwidth   145microA IDD
+   ADXL375_Self_ODR_800_HZ = 0b1101,  ///<  400Hz Bandwidth   140microA IDD
+   ADXL375_Self_ODR_400_HZ = 0b1100,  ///<  200Hz Bandwidth   140microA IDD
+   ADXL375_Self_ODR_200_HZ = 0b1011,  ///<  100Hz Bandwidth   140microA IDD
+   ADXL375_Self_ODR_100_HZ = 0b1010,  ///<   50Hz Bandwidth   140microA IDD
+   ADXL375_Self_ODR_3200_HZ = 0b1111, ///< 1600Hz Bandwidth   145microA IDD
  };
 
 

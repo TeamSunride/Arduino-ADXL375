@@ -132,7 +132,7 @@ float ADXL375::self_test() {
     default_configuration();
 
     // 1. set the data rate to 800Hz
-    set_data_rate(ADXL375_ODR::ODR_800_HZ);
+    set_data_rate(ADXL375_ODR::ADXL375_ODR_800_HZ);
 
     // 2. by default, the device is already in normal power operation (happened in reset())
 

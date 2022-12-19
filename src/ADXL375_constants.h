@@ -6,8 +6,8 @@
  bit 0: RW bit. When 0, the data DI(7:0) is written into the device. When 1, the data DO(7:0) from the
  device is read. In latter case, the chip will drive SDO at the start of bit 8.
 */
-#define WRITE_BYTE 0b01000000
-#define READ_BYTE 0b11000000
+#define ADXL375_WRITE_BYTE 0b01000000
+#define ADXL375_READ_BYTE 0b11000000
 
 #define ADXL375_DEFAULT_I2C_ADDRESS 0x1D // When the ALT ADDRESS pin (Pin 12) is tied high to VDD I/O, the 7-bit I2C address for the device 
 

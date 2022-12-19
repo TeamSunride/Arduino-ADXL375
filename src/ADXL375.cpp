@@ -5,7 +5,7 @@ ADXL375::ADXL375(TwoWire *pipe, uint32_t freq) { // constructor for I2C protocol
 
 ADXL375::ADXL375(byte chipSelect, SPIClass& spi, uint32_t freq){
 SPISettings settings = SPISettings(freq, MSBFIRST, SPI_MODE3);
-    device = new SPIProtocol(chipSelect, spi, settings, READ_BYTE, WRITE_BYTE);
+    device = new SPIProtocol(chipSelect, spi, settings, ADXL375_READ_BYTE, ADXL375_WRITE_BYTE);
 }
 
 uint8_t ADXL375::set_fifo_mode(ADXL375_FIFO_MODES mode) { //

@@ -8,7 +8,7 @@
 #include "ADXL375_register.h"
 #include "ADXL375_constants.h"
 #include "Vector.h"
-#include "dynamicFifo.h"
+#include "DynamicFifo.h"
 
 #define ADXL375_ACC_CONVERSION_FACTOR 0.00981 * 49
 
